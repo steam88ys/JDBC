@@ -14,6 +14,9 @@ public interface MyUserDAO {
     public List<MyUserDTO> listAll ();
     
     // 3. 데이터 수정
+
     // 4. 데이터 삭제
+    // id가 B인 애 삭제
+    public void delete(String id);
 
 }

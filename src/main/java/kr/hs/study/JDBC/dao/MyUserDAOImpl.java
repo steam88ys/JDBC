@@ -14,12 +14,17 @@ public class MyUserDAOImpl implements MyUserDAO {
 
     @Override
     public void insert(MyUserDTO dto) {
-        String sql = "insert into myuser(id,name) values(?,?)";
-        jdbc.update(sql, dto.getId(), dto.getName());
+        String sql = "insert into usertbl(uname,email,upass) values(?,?,?)";
+        jdbc.update(sql, dto.getName(), dto.getEmail(), dto.getPass());
     }
 
     @Override
     public List<MyUserDTO> listAll() {
         return null;
+    }
+
+    @Override
+    public void delete(String id) {
+        String sql = "delete from usertbl where id='B';";
     }
 }

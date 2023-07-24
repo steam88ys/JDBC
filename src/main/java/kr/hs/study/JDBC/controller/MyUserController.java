@@ -24,4 +24,10 @@ public class MyUserController {
         return "result";
     }
 
+//    @GetMapping("/delete")
+//    public String delete(MyUserDTO dto) {
+//        service.delete(dto.getId());
+//        return "result";
+//    }
+
 }
