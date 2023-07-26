@@ -1,10 +1,9 @@
-package kr.hs.study.JDBC.controller;
+package kr.hs.study.TodoList.controller;
 
-import kr.hs.study.JDBC.dto.MyUserDTO;
-import kr.hs.study.JDBC.service.MyUserService;
+import kr.hs.study.TodoList.dto.MyUserDTO;
+import kr.hs.study.TodoList.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 

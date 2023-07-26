@@ -1,6 +1,6 @@
-package kr.hs.study.JDBC.dao;
+package kr.hs.study.TodoList.dao;
 
-import kr.hs.study.JDBC.dto.MyUserDTO;
+import kr.hs.study.TodoList.dto.MyUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

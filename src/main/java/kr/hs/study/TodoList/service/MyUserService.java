@@ -1,6 +1,6 @@
-package kr.hs.study.JDBC.service;
+package kr.hs.study.TodoList.service;
 
-import kr.hs.study.JDBC.dto.MyUserDTO;
+import kr.hs.study.TodoList.dto.MyUserDTO;
 
 import java.util.List;
 

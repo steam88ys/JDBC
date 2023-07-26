@@ -1,7 +1,7 @@
-package kr.hs.study.JDBC.service;
+package kr.hs.study.TodoList.service;
 
-import kr.hs.study.JDBC.dao.MyUserDAO;
-import kr.hs.study.JDBC.dto.MyUserDTO;
+import kr.hs.study.TodoList.dao.MyUserDAO;
+import kr.hs.study.TodoList.dto.MyUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

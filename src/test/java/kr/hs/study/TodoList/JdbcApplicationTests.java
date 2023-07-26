@@ -1,4 +1,4 @@
-package kr.hs.study.JDBC;
+package kr.hs.study.TodoList;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

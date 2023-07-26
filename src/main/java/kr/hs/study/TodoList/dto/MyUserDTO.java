@@ -1,4 +1,4 @@
-package kr.hs.study.JDBC.dto;
+package kr.hs.study.TodoList.dto;
 
 import lombok.Data;
 
