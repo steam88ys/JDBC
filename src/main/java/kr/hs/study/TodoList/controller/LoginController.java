@@ -10,8 +10,8 @@ public class LoginController {
         return "login_form";
     }
 
-    @GetMapping("/result")
-    public String result() {
-        return "result";
+    @GetMapping("/todolist_form")
+    public String todolist_form() {
+        return "todolist_form";
     }
 }
