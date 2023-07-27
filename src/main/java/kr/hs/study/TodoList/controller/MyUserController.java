@@ -22,7 +22,7 @@ public class MyUserController {
     @PostMapping("/write_form")
     public String write_form(MyUserDTO dto) {
         service.insert(dto);
-        return "result";
+        return "redirect:/login";
     }
 
 //    @GetMapping("/delete")
