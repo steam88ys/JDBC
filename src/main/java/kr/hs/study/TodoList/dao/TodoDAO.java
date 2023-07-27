@@ -8,4 +8,5 @@ import java.util.List;
 public interface TodoDAO {
     public void insert (TodoDTO dto);
     public List<TodoDTO> listAll ();
+
 }

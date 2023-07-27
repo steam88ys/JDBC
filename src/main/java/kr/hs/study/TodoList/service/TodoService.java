@@ -8,4 +8,5 @@ public interface TodoService {
     public void insert(TodoDTO dto);
 
     public List<TodoDTO> listAll ();
+
 }

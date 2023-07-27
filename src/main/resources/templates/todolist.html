@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -13,12 +13,18 @@
     <td th:text="${p.todo_date}"/>
     <td th:text="${p.todo_list}"/>
     <td th:text="${p.star}"/>
-<!--    <td><a th:href="@{'/update/'+${p.todo_id}}">수정</a>-->
-<!--      <a th:href="@{'/delete/'+${p.todo_id}}">삭제</a>-->
-<!--    </td>-->
   </tr>
 </table>
+
+<label for="select_todolist">조회:</label>
+<select id="select_todolist">
+  <option value="latest">최신순</option>
+  <option value="oldest">오래된순</option>
+  <option value="priority">중요도순</option>
+</select>
+
 <a href="/todolist">할일작성</a>
 <a href="/logout">로그아웃</a>
+
 </body>
 </html>

@@ -26,4 +26,5 @@ public class TodoDAOImpl implements TodoDAO{
         List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
         return list;
     }
+
 }
