@@ -3,6 +3,7 @@ package kr.hs.study.TodoList.dao;
 import kr.hs.study.TodoList.dto.MyUserDTO;
 import kr.hs.study.TodoList.dto.TodoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,8 @@ public class TodoDAOImpl implements TodoDAO{
 
     @Override
     public List<TodoDTO> listAll() {
-        return null;
+        String sql = "select * from todotbl order by todo_date desc";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
     }
 }
