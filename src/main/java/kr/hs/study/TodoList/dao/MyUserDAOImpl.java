@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class MyUserDAOImpl implements MyUserDAO {
-    @Autowired  // Autowired로 JdbcTemplate 자동 주입
+    @Autowired
     JdbcTemplate jdbc;
 
     @Override
@@ -23,8 +23,4 @@ public class MyUserDAOImpl implements MyUserDAO {
         return null;
     }
 
-    @Override
-    public void delete(String id) {
-        String sql = "delete from usertbl where id='B';";
-    }
 }

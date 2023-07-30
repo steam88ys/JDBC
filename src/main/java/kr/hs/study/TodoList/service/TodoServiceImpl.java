@@ -23,17 +23,17 @@ public class TodoServiceImpl implements TodoService {
     }
 
     public List<TodoDTO> getTodoListByLatest() {
-        // 최신순으로 데이터 조회하는 로직 구현
+        // 최신순으로 데이터 조회
         return dao.getTodoListByLatest();
     }
 
     public List<TodoDTO> getTodoListByOldest() {
-        // 오래된순으로 데이터 조회하는 로직 구현
+        // 오래된순으로 데이터 조회
         return dao.getTodoListByOldest();
     }
 
     public List<TodoDTO> getTodoListByPriority() {
-        // 중요도순으로 데이터 조회하는 로직 구현
+        // 중요도순으로 데이터 조회
         return dao.getTodoListByPriority();
     }
 

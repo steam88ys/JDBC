@@ -22,8 +22,4 @@ public class MyUserServiceImpl implements MyUserService {
         return null;
     }
 
-    @Override
-    public void delete(String id) {
-        dao.delete(id);
-    }
 }

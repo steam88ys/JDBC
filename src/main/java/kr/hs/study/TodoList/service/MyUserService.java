@@ -10,6 +10,4 @@ public interface MyUserService {
 
     public List<MyUserDTO> listAll ();
 
-    public void delete(String id);
-
 }
