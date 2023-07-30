@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="/main.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-<h1 th:text="'할 일 목록'"/>
+<h1 th:text="'할 일 목록'"></h1>
 <table width="500px">
-  <tr><td>날짜</td><td>할일</td><td>중요도</td></tr>
-  <tr th:each="p:${list1}">
-    <td th:text="${p.todo_date}"/>
-    <td th:text="${p.todo_list}"/>
-    <td th:text="${p.star}"/>
-  </tr>
+    <tr><td>날짜</td><td>할일</td><td>중요도</td></tr>
+    <tr th:each="p:${list1}">
+        <td th:text="${p.todo_date}"/>
+        <td th:text="${p.todo_list}"/>
+        <td th:text="${p.star}"/>
+    </tr>
 </table>
 
 <label for="select_todolist">조회:</label>
 <select id="select_todolist" onchange="onSelectChanged()">
-  <option value="latest">최신순</option>
-  <option value="oldest">오래된순</option>
-  <option value="priority">중요도순</option>
+    <option value="latest">최신순</option>
+    <option value="oldest">오래된순</option>
+    <option value="priority">중요도순</option>
 </select>
 
 <a href="/todolist">할일작성</a>

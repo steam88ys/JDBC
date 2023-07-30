@@ -3,19 +3,20 @@ package kr.hs.study.TodoList.controller;
 import kr.hs.study.TodoList.dto.TodoDTO;
 import kr.hs.study.TodoList.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class TodoController {
     @Autowired
     private TodoService todoService;
 
     @GetMapping("/getTodoList")
-    public List<TodoDTO> getTodoList(@RequestParam String orderBy) {
+    public ModelAndView getTodoList(@RequestParam String orderBy) {
         List<TodoDTO> todoList;
 
         if ("oldest".equals(orderBy)) {
@@ -26,7 +27,10 @@ public class TodoController {
             todoList = todoService.getTodoListByLatest();
         }
 
-        return todoList;
+        ModelAndView modelAndView = new ModelAndView("result");
+        modelAndView.addObject("list1", todoList);
+
+        return modelAndView;
     }
 
 }
