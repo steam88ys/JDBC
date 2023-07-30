@@ -9,4 +9,8 @@ public interface TodoDAO {
     public void insert (TodoDTO dto);
     public List<TodoDTO> listAll ();
 
+    List<TodoDTO> getTodoListByLatest();
+    List<TodoDTO> getTodoListByOldest();
+    List<TodoDTO> getTodoListByPriority();
+
 }

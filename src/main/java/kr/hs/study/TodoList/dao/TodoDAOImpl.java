@@ -27,4 +27,25 @@ public class TodoDAOImpl implements TodoDAO{
         return list;
     }
 
+    @Override
+    public List<TodoDTO> getTodoListByLatest() {
+        String sql = "select * from todotbl order by todo_date desc";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
+    @Override
+    public List<TodoDTO> getTodoListByOldest() {
+        String sql = "select * from todotbl order by todo_date asc";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
+    @Override
+    public List<TodoDTO> getTodoListByPriority() {
+        String sql = "select * from todotbl order by star desc";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
 }
