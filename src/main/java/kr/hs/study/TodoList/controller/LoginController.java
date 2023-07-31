@@ -37,7 +37,10 @@ public class LoginController {
     public String list(TodoDTO dto, Model model) {
         service.insert(dto);
         List<TodoDTO> list = service.listAll();
-        model.addAttribute("list1", list);
+        model.addAttribute("list", list);
+
+        List<TodoDTO> cubelist = service.getTodoListCube();
+        model.addAttribute("cubelist", cubelist);
         return "todolist";
     }
 

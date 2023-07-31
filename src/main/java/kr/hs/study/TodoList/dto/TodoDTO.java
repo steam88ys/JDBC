@@ -10,6 +10,7 @@ public class TodoDTO {
     private String todo_list;
     private String todo_date;
     private int star; // 총 별의 갯수를 저장하는 필드
+    private Integer total_tasks; // 총 작업 개수를 나타내는 필드 (계산된 값)
 
     public String getTodo_list() {
         return todo_list;

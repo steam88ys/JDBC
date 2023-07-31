@@ -48,4 +48,13 @@ public class TodoDAOImpl implements TodoDAO{
         return list;
     }
 
+    @Override
+    public List<TodoDTO> getTodoListCube() {
+        String sql = "SELECT todo_date, COUNT(*) as total_tasks\n" +
+                "        FROM todotbl\n" +
+                "        GROUP BY CUBE(todo_date)";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
 }

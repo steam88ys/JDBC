@@ -13,4 +13,6 @@ public interface TodoDAO {
     List<TodoDTO> getTodoListByOldest();
     List<TodoDTO> getTodoListByPriority();
 
+    List<TodoDTO> getTodoListCube();
+
 }

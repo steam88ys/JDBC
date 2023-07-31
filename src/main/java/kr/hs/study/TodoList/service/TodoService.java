@@ -13,4 +13,6 @@ public interface TodoService {
     List<TodoDTO> getTodoListByOldest();
     List<TodoDTO> getTodoListByPriority();
 
+    List<TodoDTO> getTodoListCube();
+
 }
