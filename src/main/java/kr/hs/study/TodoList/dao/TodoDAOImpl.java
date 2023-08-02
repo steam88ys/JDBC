@@ -21,6 +21,12 @@ public class TodoDAOImpl implements TodoDAO{
     }
 
     @Override
+    public void delete(String id) {
+        String sql = "delete from todotbl where todo_id="+id;
+        jdbc.update(sql);
+    }
+
+    @Override
     public List<TodoDTO> listAll() {
         String sql = "select * from todotbl order by todo_date desc";
         List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));

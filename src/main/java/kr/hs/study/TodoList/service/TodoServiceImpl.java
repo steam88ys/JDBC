@@ -18,6 +18,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public void delete(String id) {
+        dao.delete(id);
+    }
+
+    @Override
     public List<TodoDTO> listAll() {
         return dao.listAll();
     }

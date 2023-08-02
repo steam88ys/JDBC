@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface TodoDAO {
     public void insert (TodoDTO dto);
+    public void delete (String id);
     public List<TodoDTO> listAll ();
 
     List<TodoDTO> getTodoListByLatest();

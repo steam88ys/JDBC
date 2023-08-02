@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class TodoDTO {
+    private Long todo_id;
     private String todo_list;
     private String todo_date;
     private int star; // 총 별의 갯수를 저장하는 필드

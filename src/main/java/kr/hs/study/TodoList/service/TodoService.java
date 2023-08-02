@@ -7,6 +7,8 @@ import java.util.List;
 public interface TodoService {
     public void insert(TodoDTO dto);
 
+    public void delete (String id);
+
     public List<TodoDTO> listAll ();
 
     List<TodoDTO> getTodoListByLatest();

@@ -9,13 +9,16 @@
 
 <h1 th:text="'할 일 목록'"></h1>
 <table width="500px">
-  <tr><td>날짜</td><td>할일</td><td>중요도</td></tr>
+  <tr><td>날짜</td><td>할일</td><td>중요도</td><td>기타</td></tr>
   <tr th:each="p:${list}">
     <td>
       <span th:text="${p.todo_date}"/>
     </td>
     <td th:text="${p.todo_list}"/>
     <td th:text="${p.star}"/>
+    <td>
+      <a th:href="@{'/delete/'+${p.todo_id}}">삭제</a>
+    </td>
   </tr>
 </table>
 
@@ -39,7 +42,6 @@
 
 <a href="/todolist">할일작성</a>
 <a href="/logout">로그아웃</a>
-
 <script>
   function formatDate(element) {
     const originalDate = element.innerText;
