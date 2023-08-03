@@ -19,7 +19,8 @@
   <input type="checkbox" name="star" id="star5" value="5"><label for="star5" class="star-icon"></label>
   <!-- 체크된 박스의 갯수를 보내는 hidden input -->
   <input type="hidden" name="checkedCount" id="checkedCount" value="0">
-  <button type="submit">작성 완료</button>
+  <button type="submit">작성 완료</button><br>
+  <a th:href="@{/todolist_form}">할 일 목록</a>
 </form>
 
 <script>

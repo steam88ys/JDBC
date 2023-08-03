@@ -27,6 +27,19 @@ public class TodoDAOImpl implements TodoDAO{
     }
 
     @Override
+    public TodoDTO readOne(String id) {
+        String sql = "select * from todotbl where todo_id="+id;
+        TodoDTO dto = jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return dto;
+    }
+
+    @Override
+    public void update(TodoDTO dto) {
+        String sql = "update todotbl set todo_list=?, todo_date=? where todo_id=?";
+        jdbc.update(sql, dto.getTodo_list(), dto.getTodo_date(), dto.getTodo_id());
+    }
+
+    @Override
     public List<TodoDTO> listAll() {
         String sql = "select * from todotbl order by todo_date desc";
         List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));

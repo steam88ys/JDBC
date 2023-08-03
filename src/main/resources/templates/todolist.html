@@ -17,6 +17,7 @@
     <td th:text="${p.todo_list}"/>
     <td th:text="${p.star}"/>
     <td>
+      <a th:href="@{'/update/'+${p.todo_id}}">수정</a>
       <a th:href="@{'/delete/'+${p.todo_id}}">삭제</a>
     </td>
   </tr>

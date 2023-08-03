@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<h1 th:text="'할 일 목록 수정'"></h1>
+<form method="post" action="/update_done" th:object="${dto}">
+  날짜<input type="text" name="todo_date" th:field="*{todo_date}"><br>
+  할일<input type="text" name="todo_list" th:field="*{todo_list}"><br>
+  <button type="submit">수정완료</button>
+</form>
+</body>
+</html>

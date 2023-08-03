@@ -23,6 +23,16 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public TodoDTO readOne(String id) {
+        return dao.readOne(id);
+    }
+
+    @Override
+    public void update(TodoDTO dto) {
+        dao.update(dto);
+    }
+
+    @Override
     public List<TodoDTO> listAll() {
         return dao.listAll();
     }

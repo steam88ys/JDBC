@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface TodoService {
     public void insert(TodoDTO dto);
-
     public void delete (String id);
+
+    public TodoDTO readOne(String id);
+    public void update(TodoDTO dto);
 
     public List<TodoDTO> listAll ();
 
