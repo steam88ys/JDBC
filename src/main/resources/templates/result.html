@@ -32,6 +32,7 @@
   function formatDate(element) {
     const originalDate = element.innerText;
     const date = new Date(originalDate);
+    date.setDate(date.getDate() + 1);
     const formattedDate = date.toISOString().slice(0, 10);
     element.innerText = formattedDate;
   }

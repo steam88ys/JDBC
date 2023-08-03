@@ -44,16 +44,15 @@
 <a href="/todolist">할일작성</a>
 <a href="/logout">로그아웃</a>
 <script>
-  function formatDate(element) {
-    const originalDate = element.innerText;
-    const date = new Date(originalDate);
-    const formattedDate = date.toISOString().slice(0, 10);
-    element.innerText = formattedDate;
-  }
-
   document.addEventListener("DOMContentLoaded", function() {
     const dateElements = document.querySelectorAll("td span");
-    dateElements.forEach(formatDate);
+    dateElements.forEach(element => {
+      const originalDate = element.innerText;
+      const date = new Date(originalDate);
+      date.setDate(date.getDate() + 1);
+      const formattedDate = date.toISOString().slice(0, 10);
+      element.innerText = formattedDate;
+    });
   });
 
   function onSelectChanged() {
