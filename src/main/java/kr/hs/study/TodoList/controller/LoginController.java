@@ -55,13 +55,14 @@ public class LoginController {
         // select로 내용 가져오기
         TodoDTO dto = service.readOne(id);
         model.addAttribute("dto", dto);
-        System.out.println("update");
         return "update_form";
     }
 
     @PostMapping("/update_done")
     public String update_done(TodoDTO dto) {
+        System.out.println(dto);
         service.update(dto);
+        System.out.println(dto);
         return "redirect:/todolist";
     }
 

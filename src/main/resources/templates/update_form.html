@@ -8,6 +8,7 @@
 <body>
 <h1 th:text="'할 일 목록 수정'"></h1>
 <form method="post" action="/update_done" th:object="${dto}">
+  <input type="hidden" name="todo_id" th:value="*{todo_id}" />
   날짜<input type="text" name="todo_date" th:field="*{todo_date}"><br>
   할일<input type="text" name="todo_list" th:field="*{todo_list}"><br>
   <button type="submit">수정완료</button>

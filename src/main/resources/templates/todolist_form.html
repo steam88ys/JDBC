@@ -39,7 +39,8 @@
   document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault(); // 폼 전송 막기
     const checkedCount = countCheckedBoxes();
-    document.getElementById('checkedCount').value = checkedCount;
+    document.getElementById('checkedCount').value = parseInt(checkedCount, 10); // 숫자로 변환하여 저장
+
     // 폼 전송
     document.getElementById('todoForm').submit();
   });

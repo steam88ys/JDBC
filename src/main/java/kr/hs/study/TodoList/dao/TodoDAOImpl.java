@@ -35,7 +35,7 @@ public class TodoDAOImpl implements TodoDAO{
 
     @Override
     public void update(TodoDTO dto) {
-        String sql = "update todotbl set todo_list=?, todo_date=? where todo_id=?";
+        String sql = "update todotbl set todo_list=?, todo_date=to_date(?,'yyyy-mm-dd hh24:mi:ss') where todo_id=?";
         jdbc.update(sql, dto.getTodo_list(), dto.getTodo_date(), dto.getTodo_id());
     }
 
