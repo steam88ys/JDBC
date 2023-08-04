@@ -47,7 +47,7 @@ public class LoginController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
         service.delete(id);
-        return "redirect:/todolist";
+        return "redirect:/todolist_form";
     }
 
     @GetMapping("/update/{id}")
@@ -63,7 +63,7 @@ public class LoginController {
         System.out.println(dto);
         service.update(dto);
         System.out.println(dto);
-        return "redirect:/todolist";
+        return "redirect:/todolist_form";
     }
 
 }

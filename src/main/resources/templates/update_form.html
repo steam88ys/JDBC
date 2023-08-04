@@ -13,5 +13,21 @@
   할일<input type="text" name="todo_list" th:field="*{todo_list}"><br>
   <button type="submit">수정완료</button>
 </form>
+
+<script>
+function formatDate(element) {
+    const originalDate = element.value;
+    const date = new Date(originalDate);
+    date.setDate(date.getDate() + 1);
+    const formattedDate = date.toISOString().slice(0, 10);
+    element.value = formattedDate;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const dateElements = document.querySelectorAll("input[name='todo_date']");
+    dateElements.forEach(formatDate);
+});
+</script>
+
 </body>
 </html>
