@@ -1,6 +1,7 @@
 package kr.hs.study.TodoList.dto;
 
 import lombok.Data;
+import lombok.Setter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +22,6 @@ public class TodoDTO {
         return todo_date;
     }
 
-    // getter 메서드에서 총 별의 갯수를 반환하도록 수정
     public int getStar() {
         return star;
     }

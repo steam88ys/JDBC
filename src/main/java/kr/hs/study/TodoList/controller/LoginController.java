@@ -36,6 +36,7 @@ public class LoginController {
     @PostMapping("/todolist_form")
     public String list(TodoDTO dto, Model model) {
         service.insert(dto);
+        System.out.println(dto);
         List<TodoDTO> list = service.listAll();
         model.addAttribute("list", list);
 
