@@ -21,14 +21,9 @@ public class MyUserController {
 
     @PostMapping("/write_form")
     public String write_form(MyUserDTO dto) {
+        System.out.println(dto);
         service.insert(dto);
         return "redirect:/login";
     }
-
-//    @GetMapping("/delete")
-//    public String delete(MyUserDTO dto) {
-//        service.delete(dto.getId());
-//        return "result";
-//    }
 
 }

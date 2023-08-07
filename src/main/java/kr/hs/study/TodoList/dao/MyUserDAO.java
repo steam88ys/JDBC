@@ -7,6 +7,4 @@ import java.util.List;
 public interface MyUserDAO {
     public void insert (MyUserDTO dto);
 
-    public List<MyUserDTO> listAll ();
-
 }

@@ -17,9 +17,4 @@ public class MyUserServiceImpl implements MyUserService {
         dao.insert(dto);
     }
 
-    @Override
-    public List<MyUserDTO> listAll() {
-        return null;
-    }
-
 }
