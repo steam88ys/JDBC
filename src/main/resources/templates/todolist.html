@@ -36,9 +36,9 @@
 
 <label for="select_todolist">조회:</label>
 <select id="select_todolist" onchange="onSelectChanged()">
-  <option value="latest">최신순</option>
-  <option value="oldest">오래된순</option>
-  <option value="priority">중요도순</option>
+  <option value="latest" th:selected="${orderBy == 'latest'}">최신순</option>
+  <option value="oldest" th:selected="${orderBy == 'oldest'}">오래된순</option>
+  <option value="priority" th:selected="${orderBy == 'priority'}">중요도순</option>
 </select>
 
 <a href="/todolist">할일작성</a>

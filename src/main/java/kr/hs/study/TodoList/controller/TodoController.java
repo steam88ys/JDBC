@@ -29,6 +29,7 @@ public class TodoController {
 
         ModelAndView modelAndView = new ModelAndView("result");
         modelAndView.addObject("list1", todoList);
+        modelAndView.addObject("orderBy", orderBy);
 
         return modelAndView;
     }
