@@ -1,5 +1,7 @@
 package kr.hs.study.TodoList.controller;
 
+import kr.hs.study.TodoList.userEntity.User;
+import kr.hs.study.TodoList.userEntity.UserService;
 import kr.hs.study.TodoList.dto.TodoDTO;
 import kr.hs.study.TodoList.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -14,11 +17,30 @@ public class LoginController {
     @Autowired
     private TodoService service;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/login")
-    public String login() {
-        return "login_form";
+    public String showLoginForm() {
+        return "login_form"; // 로그인 폼 템플릿 (login_form.html 등)
     }
 
+    @PostMapping("/login_form")
+    public String processLogin(@RequestParam String uname, @RequestParam String upass, HttpSession session) {
+        User user = userService.login(uname, upass);
+        if (user != null) {
+            session.setAttribute("user", user);
+            return "redirect:/todolist"; // 로그인 성공 시 이동할 페이지
+        } else {
+            return "redirect:/login?error"; // 로그인 실패 시 이동할 페이지
+        }
+    }
+
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login_form";
+//    }
+//
     @GetMapping("/todolist")
     public String todolist_form() {
         return "todolist_form";

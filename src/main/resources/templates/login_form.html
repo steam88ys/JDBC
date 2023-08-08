@@ -7,7 +7,7 @@
 </head>
 <body style="padding: 300px;">
 <h1 th:text="'로그인'"/>
-<form method="post" action="/login_proc">
+<form method="post" action="/login_form">
     <div>
         <label for="uname">이메일 </label>
         <input type="text" id="uname" name="uname">
@@ -15,7 +15,7 @@
 
     <div>
         <label for="upass">비밀번호 </label>
-        <input type="password" id="upass" name="upass">
+        <input type="text" id="upass" name="upass">
     </div>
 
     <button type="submit" style="float:right;">로그인</button>
