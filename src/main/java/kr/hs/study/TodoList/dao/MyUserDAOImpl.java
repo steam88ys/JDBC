@@ -14,7 +14,8 @@ public class MyUserDAOImpl implements MyUserDAO {
 
     @Override
     public void insert(MyUserDTO dto) {
-        String sql = "insert into usertbl(uname,email,upass) values(?,?,?)";
+        String sql = "insert into usertbl(id, uname,email,upass) " +
+                "values(usertbl_seq.NEXTVAL, ?,?,?)";
         jdbc.update(sql, dto.getUname(), dto.getEmail(), dto.getUpass());
     }
 
