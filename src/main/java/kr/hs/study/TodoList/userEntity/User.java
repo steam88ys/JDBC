@@ -1,8 +1,11 @@
 package kr.hs.study.TodoList.userEntity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "usertbl")
 public class User {

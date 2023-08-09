@@ -1,5 +1,6 @@
 package kr.hs.study.TodoList.controller;
 
+import kr.hs.study.TodoList.userEntity.Todo;
 import kr.hs.study.TodoList.userEntity.User;
 import kr.hs.study.TodoList.userEntity.UserService;
 import kr.hs.study.TodoList.dto.TodoDTO;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class LoginController {
         return "login_form"; // 로그인 폼 템플릿 (login_form.html 등)
     }
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @PostMapping("/login_form")
     public String processLogin(@RequestParam String uname, @RequestParam String upass, HttpSession session) {
         User user = userService.login(uname, upass);
@@ -36,11 +42,6 @@ public class LoginController {
         }
     }
 
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login_form";
-//    }
-//
     @GetMapping("/todolist")
     public String todolist_form() {
         return "todolist_form";
@@ -56,9 +57,17 @@ public class LoginController {
     }
 
     @PostMapping("/todolist_form")
-    public String list(TodoDTO dto, Model model) {
-        service.insert(dto);
-        System.out.println(dto);
+    public String list(TodoDTO dto, Model model, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("user"); // 로그인된 사용자 정보 가져오기
+
+        if (loggedInUser != null) {
+            dto.setUser_email(loggedInUser.getEmail()); // 로그인된 사용자의 이메일 설정
+            service.insert(dto);
+        } else {
+            // 로그인되지 않은 경우 처리 (예: 에러 페이지로 리다이렉트)
+            return "redirect:/login?error";
+        }
+
         List<TodoDTO> list = service.listAll();
         model.addAttribute("list", list);
 
@@ -66,6 +75,20 @@ public class LoginController {
         model.addAttribute("cubelist", cubelist);
         return "todolist";
     }
+
+
+
+//    @PostMapping("/todolist_form")
+//    public String list(TodoDTO dto, Model model) {
+//        service.insert(dto);
+//        System.out.println(dto);
+//        List<TodoDTO> list = service.listAll();
+//        model.addAttribute("list", list);
+//
+//        List<TodoDTO> cubelist = service.getTodoListCube();
+//        model.addAttribute("cubelist", cubelist);
+//        return "todolist";
+//    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {

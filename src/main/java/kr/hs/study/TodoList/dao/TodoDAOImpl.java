@@ -15,10 +15,11 @@ public class TodoDAOImpl implements TodoDAO{
 
     @Override
     public void insert(TodoDTO dto) {
-        String sql = "INSERT INTO todotbl (todo_id, todo_list, todo_date, star) " +
-                "VALUES (todotbl_seq.NEXTVAL, ?, ?, ?)";
-        jdbc.update(sql, dto.getTodo_list(), dto.getTodo_date(), dto.getStar());
+        String sql = "INSERT INTO todotbl (todo_id, todo_list, todo_date, star, user_email) " +
+                "VALUES (todotbl_seq.NEXTVAL, ?, ?, ?, ?)";
+        jdbc.update(sql, dto.getTodo_list(), dto.getTodo_date(), dto.getStar(), dto.getUser_email());
     }
+
 
     @Override
     public void delete(String id) {
