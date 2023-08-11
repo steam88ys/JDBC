@@ -77,4 +77,14 @@ public class TodoDAOImpl implements TodoDAO{
         return list;
     }
 
+    @Override
+    public List<TodoDTO> join() {
+        String sql = "SELECT usertbl.uname, todotbl.todo_date\n" +
+                "FROM usertbl\n" +
+                "INNER JOIN todotbl ON usertbl.email = todotbl.user_email\n" +
+                "WHERE todotbl.star = 5";
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
 }

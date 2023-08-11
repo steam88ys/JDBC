@@ -19,4 +19,6 @@ public interface TodoService {
 
     List<TodoDTO> getTodoListCube();
 
+    public List<TodoDTO> join();
+
 }

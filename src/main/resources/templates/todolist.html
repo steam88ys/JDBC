@@ -8,6 +8,13 @@
 <body>
 
 <h1 th:text="'할 일 목록'"></h1>
+
+<tr th:each="p: ${joinlist}">
+  <td>
+    <span th:text="${p.uname} + '님 ' + ${p.todo_date} + '일에 중요한 일이 있습니다.'"></span>
+  </td>
+</tr>
+
 <table width="500px">
   <tr><td>날짜</td><td>할일</td><td>중요도</td><td>기타</td></tr>
   <tr th:each="p:${list}">

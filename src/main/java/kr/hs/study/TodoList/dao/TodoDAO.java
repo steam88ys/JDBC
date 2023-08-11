@@ -20,4 +20,6 @@ public interface TodoDAO {
 
     List<TodoDTO> getTodoListCube();
 
+    public List<TodoDTO> join();
+
 }

@@ -49,6 +49,8 @@ public class LoginController {
 
     @GetMapping("/todolist_form")
     public String listAll(TodoDTO dto, Model model) {
+        List<TodoDTO> joinlist = service.join();
+        model.addAttribute("joinlist", joinlist);
         List<TodoDTO> list = service.listAll();
         model.addAttribute("list", list);
         List<TodoDTO> cubelist = service.getTodoListCube();

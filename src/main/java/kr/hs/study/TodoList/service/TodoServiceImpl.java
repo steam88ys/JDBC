@@ -57,4 +57,9 @@ public class TodoServiceImpl implements TodoService {
         return dao.getTodoListCube();
     }
 
+    @Override
+    public List<TodoDTO> join() {
+        return dao.join();
+    }
+
 }

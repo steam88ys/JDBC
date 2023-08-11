@@ -15,6 +15,8 @@ public class TodoDTO {
     private String user_email;
     private Integer total_tasks; // 총 작업 개수를 나타내는 필드 (계산된 값)
 
+    private String uname;
+
     public String getTodo_list() {
         return todo_list;
     }
