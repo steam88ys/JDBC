@@ -37,6 +37,11 @@ public class TodoServiceImpl implements TodoService {
         return dao.listAll();
     }
 
+    @Override
+    public List<TodoDTO> listAll(String loggedInUserEmail) {
+        return dao.listAll(loggedInUserEmail);
+    }
+
     public List<TodoDTO> getTodoListByLatest() {
         // 최신순으로 데이터 조회
         return dao.getTodoListByLatest();

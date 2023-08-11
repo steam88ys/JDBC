@@ -2,12 +2,17 @@ package kr.hs.study.TodoList.dao;
 
 import kr.hs.study.TodoList.dto.MyUserDTO;
 import kr.hs.study.TodoList.dto.TodoDTO;
+import kr.hs.study.TodoList.userEntity.User;
+import kr.hs.study.TodoList.userEntity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public class TodoDAOImpl implements TodoDAO{
     @Autowired  // Autowired로 JdbcTemplate 자동 주입
@@ -40,11 +45,27 @@ public class TodoDAOImpl implements TodoDAO{
         jdbc.update(sql, dto.getTodo_list(), dto.getTodo_date(), dto.getStar(), dto.getTodo_id());
     }
 
+
     @Override
     public List<TodoDTO> listAll() {
         String sql = "select * from todotbl order by todo_date desc";
         List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
         return list;
+    }
+
+    @Override
+    public List<TodoDTO> listAll(String loggedInUserEmail) {
+        String sql = "SELECT t.* FROM todotbl t INNER JOIN usertbl u ON t.user_email = u.email WHERE u.email = ? ORDER BY t.todo_date DESC";
+
+        Map<String, Object> userMap = jdbc.queryForMap("SELECT * FROM usertbl WHERE email = ?", loggedInUserEmail);
+        System.out.println(loggedInUserEmail);
+        if (userMap != null) {
+            List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class), loggedInUserEmail);
+            return list;
+        } else {
+            // 사용자 정보와 일치하지 않을 경우 처리
+            return Collections.emptyList();
+        }
     }
 
     @Override

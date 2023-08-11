@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -36,6 +39,10 @@ public class LoginController {
         User user = userService.login(uname, upass);
         if (user != null) {
             session.setAttribute("user", user);
+
+            List<TodoDTO> todolist = service.listAll(user.getEmail());
+            session.setAttribute("todolist", todolist);
+
             return "redirect:/todolist"; // 로그인 성공 시 이동할 페이지
         } else {
             return "redirect:/login?error"; // 로그인 실패 시 이동할 페이지
@@ -47,16 +54,39 @@ public class LoginController {
         return "todolist_form";
     }
 
+
     @GetMapping("/todolist_form")
-    public String listAll(TodoDTO dto, Model model) {
-        List<TodoDTO> joinlist = service.join();
-        model.addAttribute("joinlist", joinlist);
-        List<TodoDTO> list = service.listAll();
-        model.addAttribute("list", list);
-        List<TodoDTO> cubelist = service.getTodoListCube();
-        model.addAttribute("cubelist", cubelist);
-        return "todolist";
+    public String listAll(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("user");
+
+        if (loggedInUser != null) {
+            List<TodoDTO> joinlist = service.join();
+            model.addAttribute("joinlist", joinlist);
+
+            List<TodoDTO> list = service.listAll(loggedInUser.getEmail());
+            model.addAttribute("list", list);
+
+            List<TodoDTO> cubelist = service.getTodoListCube();
+            model.addAttribute("cubelist", cubelist);
+
+            return "todolist";
+        } else {
+            return "redirect:/login?error";
+        }
     }
+
+
+
+//    @GetMapping("/todolist_form")
+//    public String listAll(TodoDTO dto, Model model) {
+//        List<TodoDTO> joinlist = service.join();
+//        model.addAttribute("joinlist", joinlist);
+//        List<TodoDTO> list = service.listAll();
+//        model.addAttribute("list", list);
+//        List<TodoDTO> cubelist = service.getTodoListCube();
+//        model.addAttribute("cubelist", cubelist);
+//        return "todolist";
+//    }
 
     @PostMapping("/todolist_form")
     public String list(TodoDTO dto, Model model, HttpSession session) {
@@ -65,18 +95,20 @@ public class LoginController {
         if (loggedInUser != null) {
             dto.setUser_email(loggedInUser.getEmail()); // 로그인된 사용자의 이메일 설정
             service.insert(dto);
+
+            List<TodoDTO> list = service.listAll(loggedInUser.getEmail()); // 로그인된 사용자의 할 일 목록 가져오기
+            model.addAttribute("list", list);
+
+            List<TodoDTO> cubelist = service.getTodoListCube();
+            model.addAttribute("cubelist", cubelist);
+
+            return "todolist";
         } else {
             // 로그인되지 않은 경우 처리 (예: 에러 페이지로 리다이렉트)
             return "redirect:/login?error";
         }
-
-        List<TodoDTO> list = service.listAll();
-        model.addAttribute("list", list);
-
-        List<TodoDTO> cubelist = service.getTodoListCube();
-        model.addAttribute("cubelist", cubelist);
-        return "todolist";
     }
+
 
 
 

@@ -14,6 +14,9 @@ public interface TodoDAO {
 
     public List<TodoDTO> listAll ();
 
+
+    List<TodoDTO> listAll(String loggedInUserEmail);
+
     List<TodoDTO> getTodoListByLatest();
     List<TodoDTO> getTodoListByOldest();
     List<TodoDTO> getTodoListByPriority();
