@@ -9,14 +9,16 @@
 
 <h1 th:text="'할 일 목록'"></h1>
 
-<tr th:each="p: ${joinlist}">
-  <td>
-    <span th:text="${p.uname}+'님 '"></span>
-    <span id="originalDate" th:text="${p.todo_date}"></span>
-    <span>일에 중요한 일이 있습니다.</span>
-  </td>
-</tr>
-
+<table width="500px">
+  <tr th:each="p: ${joinlist}">
+    <td>
+      <span th:text="${p.uname} + '님 '"></span>
+      <span class="originalDate" th:text="${p.todo_date}"></span>
+      <span>일에 중요한 일이 있습니다.</span>
+    </td>
+  </tr>
+</table>
+<br>
 <table width="500px">
   <tr><td>날짜</td><td>할일</td><td>중요도</td><td>기타</td></tr>
   <tr th:each="p:${list}">
@@ -54,24 +56,22 @@
 <a th:href="@{/logout}">로그아웃</a>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const dateElements = document.querySelectorAll("td span");
+    const dateElements = document.querySelectorAll(".originalDate");
     dateElements.forEach(element => {
       const originalDate = element.innerText;
       const date = new Date(originalDate);
       date.setDate(date.getDate() + 1);
-      const formattedDate = date.toISOString().slice(0, 10);
+      const formattedDate = formatDate(date);
       element.innerText = formattedDate;
     });
   });
 
-  document.addEventListener("DOMContentLoaded", function() {
-    const dateElement = document.getElementById("originalDate");
-    const originalDate = dateElement.innerText;
-    const date = new Date(originalDate);
-    date.setDate(date.getDate() + 1);
-    const formattedDate = date.toISOString().slice(0, 10);
-    dateElement.innerText = formattedDate;
-  });
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
   function onSelectChanged() {
     var dropdown = document.getElementById("select_todolist");
