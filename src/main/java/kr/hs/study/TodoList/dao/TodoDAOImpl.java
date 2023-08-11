@@ -99,13 +99,21 @@ public class TodoDAOImpl implements TodoDAO{
     }
 
     @Override
-    public List<TodoDTO> join() {
+    public List<TodoDTO> join(String loggedInUserEmail) {
         String sql = "SELECT usertbl.uname, todotbl.todo_date\n" +
                 "FROM usertbl\n" +
                 "INNER JOIN todotbl ON usertbl.email = todotbl.user_email\n" +
-                "WHERE todotbl.star = 5";
-        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
-        return list;
+                "WHERE usertbl.email = ? AND todotbl.star = 5";
+
+        Map<String, Object> userMap = jdbc.queryForMap("SELECT * FROM usertbl WHERE email = ?", loggedInUserEmail);
+        if (userMap != null) {
+            List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class), loggedInUserEmail);
+            return list;
+        } else {
+            // 사용자 정보와 일치하지 않을 경우 처리
+            return Collections.emptyList();
+        }
     }
+
 
 }

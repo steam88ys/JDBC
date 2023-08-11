@@ -21,6 +21,6 @@ public interface TodoService {
 
     List<TodoDTO> getTodoListCube();
 
-    public List<TodoDTO> join();
+    public List<TodoDTO> join(String loggedInUserEmail);
 
 }

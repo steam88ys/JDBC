@@ -63,8 +63,8 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<TodoDTO> join() {
-        return dao.join();
+    public List<TodoDTO> join(String loggedInUserEmail) {
+        return dao.join(loggedInUserEmail);
     }
 
 }

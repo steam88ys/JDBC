@@ -60,7 +60,7 @@ public class LoginController {
         User loggedInUser = (User) session.getAttribute("user");
 
         if (loggedInUser != null) {
-            List<TodoDTO> joinlist = service.join();
+            List<TodoDTO> joinlist = service.join(loggedInUser.getEmail());
             model.addAttribute("joinlist", joinlist);
 
             List<TodoDTO> list = service.listAll(loggedInUser.getEmail());
