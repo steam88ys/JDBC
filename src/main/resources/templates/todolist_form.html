@@ -22,22 +22,40 @@
   </fieldset><br>
   <!-- 체크된 레이팅 체크박스의 개수를 보내는 hidden input -->
   <input type="hidden" id="checkedCount" name="checkedCount" value="5">
-  <button type="submit">입력완료</button>
+  <button type="submit" id="submitButton" disabled>입력완료</button>
 </form>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const ratingRadios = document.querySelectorAll('input[name="star"]');
     const checkedCountInput = document.getElementById('checkedCount');
+    const todoDateInput = document.getElementById('todo_date');
+    const todoListInput = document.getElementById('todo_list');
+    const submitButton = document.getElementById('submitButton');
+
+    function checkInputs() {
+      const selectedValue = document.querySelector('input[name="star"]:checked');
+      const todoDateValue = todoDateInput.value;
+      const todoListValue = todoListInput.value;
+
+      if (selectedValue && todoDateValue && todoListValue) {
+        submitButton.disabled = false;
+      } else {
+        submitButton.disabled = true;
+      }
+    }
 
     ratingRadios.forEach(radio => {
       radio.addEventListener('change', function() {
-        // 선택된 라디오 버튼의 값을 추출하여 숫자로 변환한 후 DTO의 star 필드에 지정합니다.
         const selectedValue = document.querySelector('input[name="star"]:checked').value;
         const starValue = parseInt(selectedValue);
         checkedCountInput.value = starValue;
+        checkInputs();
       });
     });
+
+    todoDateInput.addEventListener('input', checkInputs);
+    todoListInput.addEventListener('input', checkInputs);
   });
 </script>
 
