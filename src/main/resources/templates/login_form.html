@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>TodoList</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body style="padding: 300px;">
 <h1 th:text="'로그인'"/>
 <form method="post" action="/login_form">
     <div>
-        <label for="uname">이메일 </label>
+        <label for="uname">사용자 이름 </label>
         <input type="text" id="uname" name="uname">
     </div>
 

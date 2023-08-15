@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>TodoList</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body style="padding: 300px;">
     <h1 th:text="'회원가입'"/>
     <form method="post" action="write_form">
-        이름 <input type="text" name="uname"><br>
+        사용자 이름 <input type="text" name="uname"><br>
         이메일 <input type="text" name="email"><br>
         비밀번호 <input type="text" name="upass"><br>
         <button type="submit" style="float:right;">회원가입</button>
