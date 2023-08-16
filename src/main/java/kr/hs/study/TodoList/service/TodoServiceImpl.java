@@ -57,6 +57,10 @@ public class TodoServiceImpl implements TodoService {
         return dao.getTodoListByPriority();
     }
 
+    public List<TodoDTO> calculateCubelist() {
+        return dao.calculateCubelist();
+    }
+
     @Override
     public List<TodoDTO> getTodoListCube() {
         return dao.getTodoListCube();

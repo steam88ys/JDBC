@@ -29,4 +29,33 @@ public class TodoDTO {
         return star;
     }
 
+
+    private int subtotal;
+    private int intermediate;
+    private int grand_total;
+
+    public int getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(int subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public int getIntermediate() {
+        return intermediate;
+    }
+
+    public void setIntermediate(int intermediate) {
+        this.intermediate = intermediate;
+    }
+
+    public int getGrand_total() {
+        return grand_total;
+    }
+
+    public void setGrand_total(int grand_total) {
+        this.grand_total = grand_total;
+    }
+
 }

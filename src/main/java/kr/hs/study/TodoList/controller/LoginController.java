@@ -54,39 +54,40 @@ public class LoginController {
         return "todolist_form";
     }
 
+    @Autowired
+    private TodoService todoService;
 
     @GetMapping("/todolist_form")
     public String listAll(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("user");
 
         if (loggedInUser != null) {
-            List<TodoDTO> joinlist = service.join(loggedInUser.getEmail());
+            List<TodoDTO> joinlist = todoService.join(loggedInUser.getEmail());
             model.addAttribute("joinlist", joinlist);
 
-            List<TodoDTO> list = service.listAll(loggedInUser.getEmail());
+            List<TodoDTO> list = todoService.listAll(loggedInUser.getEmail());
             model.addAttribute("list", list);
 
-            List<TodoDTO> cubelist = service.getTodoListCube();
+            List<TodoDTO> cubelist = todoService.getTodoListCube();
+
+            // 소계, 중계, 총합계 계산
+            int grandTotal = cubelist.stream().mapToInt(TodoDTO::getTotal_tasks).sum();
+            int intermediate = 0;
+            for (TodoDTO todoDTO : cubelist) {
+                intermediate += todoDTO.getTotal_tasks();
+                todoDTO.setIntermediate(intermediate);
+                todoDTO.setGrand_total(grandTotal);
+                todoDTO.setSubtotal(grandTotal - intermediate);
+            }
+
             model.addAttribute("cubelist", cubelist);
+            model.addAttribute("grandTotal", grandTotal);
 
             return "todolist";
         } else {
             return "redirect:/login?error";
         }
     }
-
-
-
-//    @GetMapping("/todolist_form")
-//    public String listAll(TodoDTO dto, Model model) {
-//        List<TodoDTO> joinlist = service.join();
-//        model.addAttribute("joinlist", joinlist);
-//        List<TodoDTO> list = service.listAll();
-//        model.addAttribute("list", list);
-//        List<TodoDTO> cubelist = service.getTodoListCube();
-//        model.addAttribute("cubelist", cubelist);
-//        return "todolist";
-//    }
 
     @PostMapping("/todolist_form")
     public String list(TodoDTO dto, Model model, HttpSession session) {
@@ -99,7 +100,12 @@ public class LoginController {
             List<TodoDTO> list = service.listAll(loggedInUser.getEmail()); // 로그인된 사용자의 할 일 목록 가져오기
             model.addAttribute("list", list);
 
-            List<TodoDTO> cubelist = service.getTodoListCube();
+            List<TodoDTO> cubelist = service.calculateCubelist();
+            int grandTotal = 0;
+            for (TodoDTO todoDTO : cubelist) {
+                grandTotal += todoDTO.getTotal_tasks();
+                todoDTO.setGrand_total(grandTotal);
+            }
             model.addAttribute("cubelist", cubelist);
 
             return "todolist";
@@ -108,21 +114,6 @@ public class LoginController {
             return "redirect:/login?error";
         }
     }
-
-
-
-
-//    @PostMapping("/todolist_form")
-//    public String list(TodoDTO dto, Model model) {
-//        service.insert(dto);
-//        System.out.println(dto);
-//        List<TodoDTO> list = service.listAll();
-//        model.addAttribute("list", list);
-//
-//        List<TodoDTO> cubelist = service.getTodoListCube();
-//        model.addAttribute("cubelist", cubelist);
-//        return "todolist";
-//    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
@@ -140,9 +131,7 @@ public class LoginController {
 
     @PostMapping("/update_done")
     public String update_done(TodoDTO dto) {
-        System.out.println(dto);
         service.update(dto);
-        System.out.println(dto);
         return "redirect:/todolist_form";
     }
 

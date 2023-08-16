@@ -23,6 +23,8 @@ public interface TodoDAO {
 
     List<TodoDTO> getTodoListCube();
 
+    public List<TodoDTO> calculateCubelist();
+
     public List<TodoDTO> join(String loggedInUserEmail);
 
 }

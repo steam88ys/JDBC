@@ -99,6 +99,22 @@ public class TodoDAOImpl implements TodoDAO{
     }
 
     @Override
+    public List<TodoDTO> calculateCubelist() {
+        String sql = "SELECT\n" +
+                "  todo_date,\n" +
+                "  COUNT(*) AS total_tasks,\n" +
+                "  SUM(COUNT(*)) OVER() AS grand_total,\n" +
+                "  SUM(COUNT(*)) OVER(ORDER BY todo_date) AS intermediate,\n" +
+                "  SUM(COUNT(*)) OVER() - SUM(COUNT(*)) OVER(ORDER BY todo_date) AS subtotal\n" +
+                "FROM todotbl\n" +
+                "GROUP BY todo_date\n" +
+                "ORDER BY todo_date";
+
+        List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
+        return list;
+    }
+
+    @Override
     public List<TodoDTO> join(String loggedInUserEmail) {
         String sql = "SELECT usertbl.uname, todotbl.todo_date\n" +
                 "FROM usertbl\n" +

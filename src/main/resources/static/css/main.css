@@ -1,5 +1,5 @@
-input{
-    color: dodgerblue;
+body {
+    margin: 6%;
 }
 
 a:link{text-decoration:none; color:gray;}
@@ -11,9 +11,6 @@ table,td{
     border-collapse:collapse;
     font-size:9pt;
     color:#333;
-}
-tr:nth-child(odd) {
-    background:skyblue;
 }
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
