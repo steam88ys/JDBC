@@ -15,10 +15,23 @@
 
     <div>
         <label for="upass">비밀번호 </label>
-        <input type="text" id="upass" name="upass">
+        <input type="password" id="upass" name="upass"> <!-- 입력 형식을 password로 변경 -->
     </div>
 
     <button type="submit" style="float:right;">로그인</button>
 </form>
+<script th:if="${loginError}">
+    <!-- 로그인 실패 시에 alert 메시지를 표시하는 JavaScript 코드 -->
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var errorMessage = /*[[${loginError}]]*/ ''; // 변수 치환 방식 수정
+            if (errorMessage) {
+                alert(errorMessage);
+                console.log('ddd');
+            }
+        });
+    </script>
+</script>
+
 </body>
 </html>

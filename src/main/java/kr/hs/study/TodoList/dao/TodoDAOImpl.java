@@ -1,9 +1,6 @@
 package kr.hs.study.TodoList.dao;
 
-import kr.hs.study.TodoList.dto.MyUserDTO;
 import kr.hs.study.TodoList.dto.TodoDTO;
-import kr.hs.study.TodoList.userEntity.User;
-import kr.hs.study.TodoList.userEntity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,7 +55,6 @@ public class TodoDAOImpl implements TodoDAO{
         String sql = "SELECT t.* FROM todotbl t INNER JOIN usertbl u ON t.user_email = u.email WHERE u.email = ? ORDER BY t.todo_date DESC";
 
         Map<String, Object> userMap = jdbc.queryForMap("SELECT * FROM usertbl WHERE email = ?", loggedInUserEmail);
-        System.out.println(loggedInUserEmail);
         if (userMap != null) {
             List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class), loggedInUserEmail);
             return list;
@@ -103,8 +99,11 @@ public class TodoDAOImpl implements TodoDAO{
         String sql = "SELECT\n" +
                 "  todo_date,\n" +
                 "  COUNT(*) AS total_tasks,\n" +
+                // 전체 작업 수의 통합
                 "  SUM(COUNT(*)) OVER() AS grand_total,\n" +
+                // todo_date를 기준으로 작업 수의 누적 합
                 "  SUM(COUNT(*)) OVER(ORDER BY todo_date) AS intermediate,\n" +
+                // 날짜별 작업 수의 통합과 해당 날짜 이후까지의 작업 수 비교
                 "  SUM(COUNT(*)) OVER() - SUM(COUNT(*)) OVER(ORDER BY todo_date) AS subtotal\n" +
                 "FROM todotbl\n" +
                 "GROUP BY todo_date\n" +

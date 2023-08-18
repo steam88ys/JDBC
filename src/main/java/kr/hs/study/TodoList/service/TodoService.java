@@ -19,9 +19,9 @@ public interface TodoService {
     List<TodoDTO> getTodoListByOldest();
     List<TodoDTO> getTodoListByPriority();
 
-    List<TodoDTO> getTodoListCube();
-
     public List<TodoDTO> calculateCubelist();
+
+    public List<TodoDTO> getTodoListCube();
 
     public List<TodoDTO> join(String loggedInUserEmail);
 

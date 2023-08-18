@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
@@ -35,7 +36,7 @@ public class LoginController {
     private EntityManager entityManager;
 
     @PostMapping("/login_form")
-    public String processLogin(@RequestParam String uname, @RequestParam String upass, HttpSession session) {
+    public String processLogin(@RequestParam String uname, @RequestParam String upass, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = userService.login(uname, upass);
         if (user != null) {
             session.setAttribute("user", user);
@@ -45,7 +46,9 @@ public class LoginController {
 
             return "redirect:/todolist"; // 로그인 성공 시 이동할 페이지
         } else {
-            return "redirect:/login?error"; // 로그인 실패 시 이동할 페이지
+            // 로그인 실패 시에 메시지를 플래시 속성으로 설정하여 리다이렉트 후 alert 메시지를 표시합니다.
+            redirectAttributes.addFlashAttribute("loginError", "Invalid username or password");
+            return "redirect:/login"; // 로그인 실패 시 이동할 페이지
         }
     }
 
@@ -123,7 +126,6 @@ public class LoginController {
 
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") String id, Model model) {
-        // select로 내용 가져오기
         TodoDTO dto = service.readOne(id);
         model.addAttribute("dto", dto);
         return "update_form";
