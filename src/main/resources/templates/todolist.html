@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>TodoList</title>
-  <link rel="stylesheet" href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
 
 <h1 th:text="'할 일 목록'"></h1>
 
-<table width="500px">
+<table>
   <tr th:each="p: ${joinlist}">
     <td>
       <span th:text="${p.uname} + '님 '"></span>
@@ -19,7 +19,7 @@
   </tr>
 </table>
 <br>
-<table width="500px">
+<table>
   <tr><td>날짜</td><td>할일</td><td>중요도</td><td>기타</td></tr>
   <tr th:each="p:${list}">
     <td>
@@ -35,7 +35,7 @@
 </table>
 
 <h1 th:text="'통계'"></h1>
-<table width="500px">
+<table>
   <tr>
     <td>날짜</td>
     <td>할 일 개수</td>
