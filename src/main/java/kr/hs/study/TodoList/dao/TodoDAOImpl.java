@@ -107,7 +107,7 @@ public class TodoDAOImpl implements TodoDAO{
                 "  SUM(COUNT(*)) OVER() - SUM(COUNT(*)) OVER(ORDER BY todo_date) AS subtotal\n" +
                 "FROM todotbl\n" +
                 "GROUP BY todo_date\n" +
-                "ORDER BY todo_date";
+                "ORDER BY todo_date desc";
 
         List<TodoDTO> list = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
         return list;
