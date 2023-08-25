@@ -52,7 +52,7 @@ public class TodoDAOImpl implements TodoDAO{
 
     @Override
     public List<TodoDTO> listAll(String loggedInUserEmail) {
-        String sql = "SELECT t.* FROM todotbl t INNER JOIN usertbl u ON t.user_email = u.email WHERE u.email = ? ORDER BY t.todo_date DESC";
+        String sql = "SELECT t.* FROM todotbl t INNER JOIN usertbl u ON t.user_email = u.email WHERE u.email = ? and TRUNC(todo_date) = TRUNC(SYSDATE) ORDER BY t.todo_date DESC";
 
         Map<String, Object> userMap = jdbc.queryForMap("SELECT * FROM usertbl WHERE email = ?", loggedInUserEmail);
         if (userMap != null) {
