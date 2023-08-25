@@ -7,8 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.tomcat.jni.File.trunc;
 
 @Repository
 public class TodoDAOImpl implements TodoDAO{
@@ -35,6 +38,15 @@ public class TodoDAOImpl implements TodoDAO{
         TodoDTO dto = jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(TodoDTO.class));
         return dto;
     }
+
+    @Override
+    public List<TodoDTO> readDate(TodoDTO dto, String loggedInUserEmail, String todoDate) {
+        String sql = "SELECT t.* FROM todotbl t INNER JOIN usertbl u ON t.user_email = u.email WHERE u.email = ? AND TRUNC(t.todo_date) = TO_DATE(?, 'YYYY-MM-DD')";
+        List<TodoDTO> dtos = jdbc.query(sql, new BeanPropertyRowMapper<>(TodoDTO.class), loggedInUserEmail, todoDate);
+        System.out.println(dtos);
+        return dtos;
+    }
+
 
     @Override
     public void update(TodoDTO dto) {

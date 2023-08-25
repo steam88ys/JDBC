@@ -28,6 +28,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public List<TodoDTO> readDate(TodoDTO dto, String loggedInUserEmail, String todoDate) {
+        return dao.readDate(dto, loggedInUserEmail, todoDate);
+    }
+
+    @Override
     public void update(TodoDTO dto) {
         dao.update(dto);
     }

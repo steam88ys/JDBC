@@ -137,4 +137,13 @@ public class LoginController {
         return "redirect:/todolist_form";
     }
 
+    @GetMapping("/todos/{todo_date}")
+    public String todos(@PathVariable("todo_date") String todoDate, TodoDTO dto, Model model, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("user");
+        List<TodoDTO> todolist = service.readDate(dto, loggedInUser.getEmail(),todoDate);
+        model.addAttribute("todoList", todolist);
+        return "todo_list_template";
+    }
+
+
 }

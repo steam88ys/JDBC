@@ -9,6 +9,7 @@ public interface TodoService {
     public void delete (String id);
 
     public TodoDTO readOne(String id);
+    public List<TodoDTO> readDate(TodoDTO dto, String loggedInUserEmail, String todoDate);
     public void update(TodoDTO dto);
 
     public List<TodoDTO> listAll ();

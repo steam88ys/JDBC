@@ -44,14 +44,13 @@
     <td>합계</td>
   </tr>
   <tr th:each="p:${cubelist}">
-    <td><span th:text="${p.todo_date}"/></td>
+    <td><a th:href="@{/todos/__${#strings.substring(p.todo_date, 0, 10)}__}"><span th:text="${p.todo_date}"/></a></td>
     <td><span th:text="${p.total_tasks != null ? p.total_tasks : 0}"/></td>
     <td><span th:text="${p.subtotal != null ? p.subtotal : 0}"/></td>
     <td><span th:text="${p.intermediate != null ? p.intermediate : 0}"/></td>
     <td><span th:text="${p.grand_total != null ? p.grand_total : 0}"/></td>
   </tr>
 </table>
-
 
 <label for="select_todolist">조회:</label>
 <select id="select_todolist" onchange="onSelectChanged()">
